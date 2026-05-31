@@ -1,0 +1,32 @@
+[project]
+name = "vantage-vision"
+version = "0.1.0"
+description = "Vantage — spatial perception + memory layer (standalone vision, no voice)"
+# torch / ultralytics (YOLO26) wheels are most reliable on 3.11/3.12 for
+# Apple Silicon. Pin below 3.13 to avoid missing-wheel surprises.
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "ultralytics>=8.3.0",      # YOLOE / YOLOE-26 open-vocabulary detector
+    "torch>=2.2",              # MPS backend for Apple Silicon
+    "torchvision>=0.17",
+    "transformers>=4.44,<4.50",# Florence-2 remote code is unstable on >=4.50
+    "opencv-python>=4.9",      # webcam capture + display window
+    "einops>=0.7",             # required by Florence-2 remote code
+    "timm>=0.9",               # required by Florence-2 (DaViT vision backbone)
+    "pillow>=10.0",
+    "numpy>=1.26,<2.0",        # conservative: avoids numpy-2 ABI edge cases
+    # CLIP text encoder for YOLOE text-prompt mode (set_prompts). The prompt-free
+    # default does NOT need this, but set_prompts(["charger", ...]) does.
+    "clip @ git+https://github.com/ultralytics/CLIP.git",
+    "ftfy>=6.0",               # required by CLIP tokenizer
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true  # permit the git+ CLIP dependency above
+
+[tool.hatch.build.targets.wheel]
+packages = ["vantage"]

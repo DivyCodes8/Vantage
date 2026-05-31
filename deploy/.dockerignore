@@ -1,0 +1,11 @@
+.venv
+__pycache__
+*.pyc
+build.sh
+README_DEPLOY.md
+secrets.env
+secrets.env.example
+.gitignore
+pipecat_public_key.txt
+.pc_key_raw.txt
+cekura_api_key.txt

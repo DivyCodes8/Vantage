@@ -1,0 +1,8 @@
+secrets.env
+.venv/
+__pycache__/
+*.pyc
+
+pipecat_public_key.txt
+.pc_key_raw.txt
+cekura_api_key.txt

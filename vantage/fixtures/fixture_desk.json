@@ -1,0 +1,109 @@
+{
+  "updated": 1780000000.0,
+  "updated_iso": "2026-05-28T20:26:40+00:00",
+  "scene_caption": "A desk with a laptop, a water bottle, a charger and a coffee cup.",
+  "objects": [
+    {
+      "label": "laptop",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "center",
+      "bbox": [
+        600.0,
+        350.0,
+        950.0,
+        690.0
+      ],
+      "confidence": 0.93,
+      "low_confidence": false,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    },
+    {
+      "label": "water bottle",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "center",
+      "bbox": [
+        960.0,
+        300.0,
+        1060.0,
+        650.0
+      ],
+      "confidence": 0.9,
+      "low_confidence": false,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    },
+    {
+      "label": "charger",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "right",
+      "bbox": [
+        1500.0,
+        420.0,
+        1610.0,
+        560.0
+      ],
+      "confidence": 0.91,
+      "low_confidence": false,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    },
+    {
+      "label": "cable",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "right",
+      "bbox": [
+        1430.0,
+        500.0,
+        1690.0,
+        565.0
+      ],
+      "confidence": 0.86,
+      "low_confidence": false,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    },
+    {
+      "label": "cup",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "left",
+      "bbox": [
+        150.0,
+        470.0,
+        300.0,
+        690.0
+      ],
+      "confidence": 0.88,
+      "low_confidence": false,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    },
+    {
+      "label": "desk",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "center",
+      "bbox": [
+        0.0,
+        640.0,
+        1900.0,
+        1010.0
+      ],
+      "confidence": 0.95,
+      "low_confidence": false,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    }
+  ]
+}

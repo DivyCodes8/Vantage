@@ -1,0 +1,41 @@
+{
+  "updated": 1780000000.0,
+  "updated_iso": "2026-05-28T20:26:40+00:00",
+  "scene_caption": "A dark, mostly empty view \u2014 nothing clearly in frame.",
+  "objects": [
+    {
+      "label": "shadow",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "center",
+      "bbox": [
+        700.0,
+        400.0,
+        1200.0,
+        900.0
+      ],
+      "confidence": 0.22,
+      "low_confidence": true,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    },
+    {
+      "label": "blur",
+      "first_seen": 1779999700.0,
+      "first_seen_iso": "2026-05-28T20:21:40+00:00",
+      "region": "center",
+      "bbox": [
+        300.0,
+        200.0,
+        800.0,
+        700.0
+      ],
+      "confidence": 0.18,
+      "low_confidence": true,
+      "last_seen": 1780000000.0,
+      "last_seen_iso": "2026-05-28T20:26:40+00:00",
+      "visible": true
+    }
+  ]
+}

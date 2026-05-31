@@ -1,0 +1,47 @@
+# Secrets — never commit
+.env
+*.env
+secrets.env
+cekura_api_key.txt
+pipecat_public_key.txt
+.pc_key_raw.txt
+
+# Python envs + cache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Model weights (large, downloaded on first run)
+*.pt
+*.ts
+*.bin
+*.safetensors
+
+# Vision loop live state (changes every second)
+vantage/memory/room_state.json
+vantage/memory/change_snapshot.json
+vantage/fixtures/active.json
+vantage/fixtures/*.tmp
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+nohup.out
+
+# All venvs everywhere
+**/.venv/
+
+# The starter repo is a git repo itself — treat as submodule placeholder
+yc-voice-agents-hackathon/
+
+# deploy venv (already caught by **/.venv but be explicit)
+deploy/.venv/
+
+# Claude internal settings (session-specific, not for repo)
+.claude/
