@@ -1,6 +1,8 @@
-# Vantage — Spatial Voice Assistant
+# Vantage: Spatial Voice Assistant
 
-Vantage is an app that uses a camera to understand a room and answer spoken questions about it, so people can stay aware of their surroundings hands-free.
+Vantage turns any camera into a pair of eyes you can talk to. It watches a space in real time, builds a memory of what is in it and where, and answers spoken questions out loud. You can ask what is around you, where you left something, what has changed, or whether anything looks unsafe, and it replies in a sentence or two. No screen, no scrolling, no searching. You just ask.
+
+For someone who cannot see the room, or cannot stop to look, that difference is the whole point. Vantage is built so that understanding your surroundings does not depend on sight or a free pair of hands.
 
 **Ask it things like:**
 - *"What do you see?"*
@@ -8,15 +10,26 @@ Vantage is an app that uses a camera to understand a room and answer spoken ques
 - *"What changed since earlier?"*
 - *"Is anything unsafe?"*
 
-It answers out loud in natural speech — no screen needed.
+It answers out loud in natural speech, grounded only in what the camera has actually seen. No screen needed, and it does not guess.
 
 ---
 
 ## Who it's for
 
-- **People who are blind or have low vision** — get a spoken description of what's in the room and where things are.
-- **People who can't easily look** — hands full, limited mobility, or just busy — ask without stopping what you're doing.
-- **Anyone who wants a quick safety check** — spill risks near electronics, trip hazards, objects near edges — Vantage flags them before they become problems.
+- **People who are blind or have low vision.** Instead of feeling around a room, ask what is in front of you and where it is. Vantage describes the scene, locates specific objects on the left, center, or right, and tells you whether something it saw earlier is still there.
+- **People who can't easily look right now.** Hands full, cooking, carrying something, recovering from an injury, or moving with limited mobility. You can check on a space without stopping what you are doing.
+- **Older adults living independently, and the people who care for them.** A quick "is anything unsafe?" can catch a spill or trip hazard before it causes a fall, and a carer can check on a room without hovering.
+- **Anyone who wants a second set of eyes.** A bottle of water next to a laptop, a cable across the floor, an object balanced near an edge. Vantage flags these before they turn into a spill, a trip, or a fall.
+
+The common thread is simple. When looking is hard, slow, or unsafe, Vantage lets you ask instead.
+
+---
+
+## What makes it interesting
+
+Most camera assistants describe a single frame and forget it. **Vantage remembers.** It keeps a running, time-stamped picture of the room, so it can answer questions about the past as well as the present. "Where's my charger?" still works when the charger is out of view right now, because Vantage knows where it last saw it and how long ago.
+
+The harder problem was **honesty**. A voice assistant that confidently invents a location is worse than useless for someone who depends on it, and dangerous for someone who cannot check by looking. Vantage is built to never claim something it did not see. Every answer is grounded in structured detection data that carries confidence and visibility flags, and the language model follows strict rules. If confidence is low it hedges and suggests moving the camera closer. If an object has not been seen it says so plainly. It never fills a gap with a guess.
 
 ---
 
@@ -24,10 +37,10 @@ It answers out loud in natural speech — no screen needed.
 
 Vantage runs two things side by side:
 
-1. **Vision loop** — watches the webcam, detects objects with YOLOE-26 (open-vocabulary detector), generates a scene caption with Florence-2, and writes everything to a `room_state.json` file.
-2. **Voice agent** — listens to your spoken question via Nemotron ASR, reasons about the room using the latest `room_state.json`, and speaks the answer back via Gradium TTS. It never invents objects — it only answers from what the camera actually saw.
+1. **Vision loop.** Watches the webcam, detects objects with YOLOE-26 (open-vocabulary detector), generates a scene caption with Florence-2, and writes everything to a `room_state.json` file.
+2. **Voice agent.** Listens to your spoken question via Nemotron ASR, reasons about the room using the latest `room_state.json`, and speaks the answer back via Gradium TTS. It never invents objects. It only answers from what the camera actually saw.
 
-The two processes are fully independent. The voice agent reads a plain JSON file; no vision models are loaded into the voice pipeline.
+The two processes are fully independent. The voice agent reads a plain JSON file, and no vision models are loaded into the voice pipeline.
 
 ---
 
@@ -42,25 +55,26 @@ The two processes are fully independent. The voice agent reads a plain JSON file
 | Scene captioning | Microsoft Florence-2-base (local, MPS) |
 | Voice pipeline | Pipecat |
 | Transport | SmallWebRTC (local) |
+| Evaluation | Cekura |
 
 ---
 
 ## How to run it
 
-**Requirements:** Mac with a webcam. Python 3.11+ and `uv` are installed automatically.
+**Requirements:** Mac with a webcam. Python 3.11+ and `uv` handle the rest.
 
 ```bash
 # 1. Clone
-git clone https://github.com/YOUR_USERNAME/vantage.git
-cd vantage
+git clone https://github.com/DivyCodes8/Vantage.git
+cd Vantage
 
 # 2. Install uv (if you don't have it)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source $HOME/.local/bin/env
 
-# 3. Install dependencies (two separate envs — vision and voice stay isolated)
+# 3. Install dependencies (two separate envs, vision and voice stay isolated)
 cd yc-voice-agents-hackathon/server && uv sync && cd ../..
-cd /path/to/vantage && uv sync && cd -
+uv sync
 
 # 4. Add your Gradium API key
 # Edit yc-voice-agents-hackathon/server/.env and set:
@@ -105,7 +119,7 @@ vantage/
 
 | Ask this | What to expect |
 |---|---|
-| "What do you see?" | Description of currently visible objects + scene caption |
+| "What do you see?" | Description of currently visible objects plus scene caption |
 | "Where's my [object]?" | Location (left / center / right) and whether it's visible now or was seen recently |
 | "Is anything unsafe?" | Flags spill risks, trip hazards, and items near edges |
 | "What changed since earlier?" | New objects, missing objects, and anything that moved |
@@ -121,7 +135,7 @@ cd yc-voice-agents-hackathon/server
 uv run python ../../vantage/evals/run_evals.py
 ```
 
-**Result: 4/4 scenarios passing** — charger location, empty-room honesty, spill hazard detection, and change detection. Each scored on correctness, honesty (never invents objects), and voice quality (1–2 short spoken sentences, no raw numbers).
+**Result: 4/4 scenarios passing.** Charger location, empty-room honesty, spill hazard detection, and change detection. Each scored on correctness, honesty (never invents objects), and voice quality (one or two short spoken sentences, no raw numbers).
 
 The eval copy was also deployed to Pipecat Cloud and tested live via Cekura, with the same results.
 
@@ -133,16 +147,16 @@ Built for the **YC Voice Agents Hackathon** (May 2026), hosted by Cekura and Dai
 
 ### Tools used
 
-- **Pipecat** — voice pipeline orchestration, SmallWebRTC transport, Gradium TTS integration
-- **NVIDIA Nemotron** — speech-to-text (Nemotron Speech Streaming) and LLM (Nemotron-3-Super-120B), both via the provided hackathon endpoints
-- **Gradium** — text-to-speech with natural, low-latency voice output
-- **Cekura** — automated voice agent evaluation; 4 scenarios with correctness, honesty, and voice metrics
-- **Ultralytics YOLOE-26** — open-vocabulary object detection, prompt-free mode, Apple Silicon MPS
-- **Microsoft Florence-2** — scene captioning for ambient context
+- **Pipecat:** voice pipeline orchestration, SmallWebRTC transport, Gradium TTS integration.
+- **NVIDIA Nemotron:** speech-to-text (Nemotron Speech Streaming) and LLM (Nemotron-3-Super-120B), both via the provided hackathon endpoints.
+- **Gradium:** text-to-speech with natural, low-latency voice output.
+- **Cekura:** automated voice agent evaluation across 4 scenarios with correctness, honesty, and voice metrics.
+- **Ultralytics YOLOE-26:** open-vocabulary object detection, prompt-free mode, Apple Silicon MPS.
+- **Microsoft Florence-2:** scene captioning for ambient context.
 
 ### What we learned / feedback
 
-The hardest part wasn't the voice pipeline — Pipecat made that straightforward. The real challenge was **honesty at the boundary**: making the agent admit it hasn't seen something rather than hallucinate a location. The combination of typed tool outputs (`low_confidence`, `visible: false`, `found: false`) and explicit grounding rules in the system prompt solved it cleanly.
+The hardest part wasn't the voice pipeline. Pipecat made that straightforward. The real challenge was **honesty at the boundary**: making the agent admit it hasn't seen something rather than hallucinate a location. The combination of typed tool outputs (`low_confidence`, `visible: false`, `found: false`) and explicit grounding rules in the system prompt solved it cleanly.
 
 YOLOE-26's prompt-free vocabulary is noisy in a real room (it emits abstract labels alongside real objects). The query layer's fuzzy matching and synonym expansion handles this well, but it's worth noting for anyone building on top of this approach.
 
