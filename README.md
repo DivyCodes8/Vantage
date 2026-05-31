@@ -2,7 +2,10 @@
 
 Vantage turns any camera into a pair of eyes you can talk to. It watches a space in real time, builds a memory of what is in it and where, and answers spoken questions out loud. You can ask what is around you, where you left something, what has changed, or whether anything looks unsafe, and it replies in a sentence or two. No screen, no scrolling, no searching. You just ask.
 
+
 For someone who cannot see the room, or cannot stop to look, that difference is the whole point. Vantage is built so that understanding your surroundings does not depend on sight or a free pair of hands.
+
+Video: https://www.loom.com/share/57aee4dbeb634cacbb607d931fed634b
 
 **Ask it things like:**
 - *"What do you see?"*
