@@ -6,6 +6,7 @@ Vantage turns any camera into a pair of eyes you can talk to. It watches a space
 For someone who cannot see the room, or cannot stop to look, that difference is the whole point. Vantage is built so that understanding your surroundings does not depend on sight or a free pair of hands.
 
 Video: https://www.loom.com/share/57aee4dbeb634cacbb607d931fed634b
+Video w Camera: https://www.loom.com/share/90e74f59ab0c41d596b0f16dfbaeae75
 
 **Ask it things like:**
 - *"What do you see?"*
