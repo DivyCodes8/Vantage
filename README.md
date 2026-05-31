@@ -141,7 +141,7 @@ The eval copy was also deployed to Pipecat Cloud and tested live via Cekura, wit
 
 ---
 
-## Hackathon context
+## Feedback
 
 Built for the **YC Voice Agents Hackathon** (May 2026), hosted by Cekura and Daily, in partnership with NVIDIA, AWS, and Twilio.
 
